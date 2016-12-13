@@ -1,0 +1,29 @@
+<h1>Listing products</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+    <tr>
+      <td><%= product.name %></td>
+      <td><%= product.description %></td>
+      <td>$<%= product.pricing %></td>
+      <td><%= product.category.name if product.category %></td>
+      <td>
+        <%= link_to "Show", "/products/#{product.id}" %> |
+        <%= link_to "Edit", "/products/#{product.id}/edit" %> |
+        <%= link_to "Delete", {:controller=>:products,:action=>:destroy, :id=>product}, method: 'delete' %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Product", new_product_path %>

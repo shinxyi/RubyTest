@@ -1,0 +1,39 @@
+<table>
+  <tr>
+    <th>Name:</th>
+    <td><%= @product.name %></td>
+  </tr>
+  <tr>
+    <th>Description:</th>
+    <td><%= @product.description %></td>
+  </tr>
+  <tr>
+    <th>Price:</th>
+    <td>$<%= @product.pricing %></td>
+  </tr>
+  <tr>
+    <th>Category:</th>
+    <td><%= @product.category.name if @product.category %></td>
+  </tr>
+</table>
+<%= link_to "Edit", edit_product_path %> | <%= link_to "Back", products_path %><br/><br/>
+
+  <h3>Comment:</h3>
+  <ul>
+    <% flash.each do |key, value| %>
+      <% value.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <form action='/comment/<%=@product.id%>' method='post'>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <textarea name="comment[comment]" placeholder="Say something!"></textarea>
+    <input type='submit' value='submit'>
+  </form>
+
+
+  <% @product.comments.each do |c| %>
+    <p><%= c.comment %> - <%= c.created_at.strftime("%b %d, %Y %I:%M%p") %>  </p>
+  <% end%>
