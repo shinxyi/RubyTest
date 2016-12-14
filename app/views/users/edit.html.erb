@@ -1,0 +1,50 @@
+<div id="nav">
+  <a href="/events">Events Dashboard</a> |
+  <a href="/sessions" data-method="delete">Logout</a>
+</div>
+
+<div id="reg">
+  <h3>Edit Your Profile</h3>
+  <ul>
+    <% if flash[:alert] %>
+        <li><%= flash[:alert] %></li>
+    <%end%>
+  </ul>
+  <form action='/users/<%=current_user.id%>' method='post'>
+    <input type="hidden" name="_method" value="patch" />
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <table>
+      <tr>
+        <td>First Name: </td>
+        <td><input type="text" name="user[first_name]" value="<%=current_user.first_name%>"/></td>
+      </tr>
+      <tr>
+        <td>Last Name: </td>
+        <td><input type="text" name="user[last_name]" value="<%=current_user.last_name%>"/></td>
+      </tr>
+      <tr>
+        <td>Email: </td>
+        <td><input type="email" name="user[email]" value="<%=current_user.email%>"/></td>
+      </tr>
+      <tr>
+        <td>Location: </td>
+        <td>
+          <input type="text" name="user[city]" value="<%=current_user.city%>" size="12"/>
+          <select name="user[state]">
+            <% us_states.each do |state| %>
+              <% if current_user.state == state[1]%>
+                <option value="<%=state[1]%>" selected ><%=state[1]%></option>
+              <%else%>
+                <option value="<%=state[1]%>"><%=state[1]%></option>
+              <%end%>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type='submit' value='Update Records'></td>
+      </tr>
+    </table>
+  </form>
+</div>

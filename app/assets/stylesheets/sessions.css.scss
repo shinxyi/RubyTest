@@ -1,0 +1,19 @@
+// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+*{
+  font-family: sans-serif;
+}
+
+#reg, #login{
+  display:inline-block;
+  vertical-align: top;
+  margin-right: 25px;
+  border:2px solid grey;
+  padding: 10px;
+}
+
+#reg table, #login table{
+  text-align: right;
+}
