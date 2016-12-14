@@ -1,0 +1,50 @@
+<div id="nav">
+  <a href="/users">All Users</a> |
+  <a href="/sessions" data-method="delete">Logout</a>
+</div>
+
+<h1>Hi <%=current_user.first_name%> <%= current_user.last_name%></h1>
+
+<br/><br/>
+<h4>Here is your profile description:</h4>
+<div class="info">
+  <%=current_user.description%>
+</div>
+
+<br/><br/>
+<h4>Your Professional Network:</h4>
+<div class="info">
+  <% @user_network.each do |user| %>
+    <p><a href="/users/<%=user.id%>"><%=user.first_name%> <%=user.last_name%></a></p>
+  <% end %>
+</div>
+
+<br/><br/>
+<ul>
+  <% if flash[:alert] %>
+    <li><%= flash[:alert] %></li>
+  <% end %>
+</ul>
+
+<h4>Invitations:</h4>
+<sub>The following people asked you to be in their network:</sub>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_invite.each do |invite| %>
+      <tr>
+        <td><a href="/users/<%=invite.user.id%>"><%=invite.user.first_name%> <%=invite.user.last_name%></a></td>
+        <td>
+            <a href="/networks/<%=invite.user.id%>" data-method="patch">Accept Invitation</a> |
+            <a href="/networks/<%=invite.user.id%>" data-method="delete">Ignore</a>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

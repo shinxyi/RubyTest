@@ -4,19 +4,16 @@ Rails.application.routes.draw do
   post '/sessions' => 'sessions#create'
   delete '/sessions' => 'sessions#destroy'
 
+  get '/professional_profile' => 'users#dashboard'
+  get '/users' => 'users#index'
   post '/users' => 'users#create'
-  get '/users/:id/edit' => 'users#edit'
-  patch '/users/:id' => 'users#update'
+  get '/users/:id' => 'users#show'
+  # get '/users/:id/edit' => 'users#edit'
+  # patch '/users/:id' => 'users#update'
+  # delete '/users/:id' => 'users#destory'
 
-  get '/events' => 'events#index'
-  post '/events' => 'events#create'
-  get '/events/:id' => 'events#show'
-  get '/events/:id/edit' => 'events#edit' #no need to make
-  delete '/events/:id' => 'events#destroy'
-
-  post '/comments' => 'comments#create'
-
-  post '/rosters/:event_id' => 'rosters#create'
-  delete '/rosters/:event_id' => 'rosters#destroy'
+  post '/networks/:associate_id' => 'networks#create'
+  patch '/networks/:associate_id' => 'networks#update'
+  delete '/networks/:associate_id' => 'networks#destroy'
 
 end

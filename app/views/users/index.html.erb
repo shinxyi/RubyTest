@@ -1,0 +1,30 @@
+<div id="nav">
+  <a href="/professional_profile">My Profile</a> |
+  <a href="/sessions" data-method="delete">Logout</a>
+</div>
+
+<h3>Users you may want to connect with:</h3>
+<ul>
+  <% if flash[:alert] %>
+    <li><%= flash[:alert] %></li>
+  <% end %>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><a href="/users/<%=user.id%>"><%=user.first_name%> <%=user.last_name%></a></td>
+        <td>
+            <a href="/networks/<%=user.id%>" data-method="post">Connect</a>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

@@ -17,20 +17,21 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: ubuntu # also delete username/pw at bottom!!! then in ubuntu, "git pull"
+  # username: ubuntu # also delete username/pw at bottom!!! then in ubuntu, "git pull"
+
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
 
 development:
   <<: *default
-  database: RedBeltReviewer_development
+  database: BELT_EXAM_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: RedBeltReviewer
+  #username: BELT_EXAM
 
   # The password associated with the postgres role (username).
   #password:
@@ -58,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: RedBeltReviewer_test
+  database: BELT_EXAM_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: RedBeltReviewer_production
-  # username: RedBeltReviewer
-  # password: <%= ENV['REDBELTREVIEWER_DATABASE_PASSWORD'] %>
+  database: BELT_EXAM_production
+  # username: BELT_EXAM
+  # password: <%= ENV['BELT_EXAM_DATABASE_PASSWORD'] %>

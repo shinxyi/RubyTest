@@ -36,11 +36,19 @@
         </td>
       </tr>
       <tr>
+        <td>Birthday: </td>
+        <td><input type="date" name="user[birthday]" max="<%= today %>"/></td>
+      </tr>
+      <tr>
+        <td>Description: </td>
+        <td><textarea name="user[description]"></textarea></td>
+      </tr>
+      <tr>
         <td>Password: </td>
         <td><input type="password" name="user[password]" placeholder="Password"/></td>
       </tr>
       <tr>
-        <td colspan="2"><small>*Password must be at least 8 characters long.</small></td>
+        <td colspan="2"><sup>*Password must be at least 8 characters long.</sup></td>
       </tr>
       <tr>
         <td>Password Confirmation: </td>

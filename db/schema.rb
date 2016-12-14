@@ -11,43 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213203848) do
+ActiveRecord::Schema.define(version: 20161214211426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "comments", force: true do |t|
-    t.string   "comment"
+  create_table "networks", force: true do |t|
     t.integer  "user_id"
-    t.integer  "event_id"
+    t.integer  "associate_id"
+    t.boolean  "accepted_invite", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["event_id"], name: "index_comments_on_event_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
-
-  create_table "events", force: true do |t|
-    t.datetime "date"
-    t.string   "city"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.integer  "user_id"
-  end
-
-  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
-
-  create_table "rosters", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "rosters", ["event_id"], name: "index_rosters_on_event_id", using: :btree
-  add_index "rosters", ["user_id"], name: "index_rosters_on_user_id", using: :btree
+  add_index "networks", ["associate_id"], name: "index_networks_on_associate_id", using: :btree
+  add_index "networks", ["user_id"], name: "index_networks_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -55,9 +33,11 @@ ActiveRecord::Schema.define(version: 20161213203848) do
     t.string   "email"
     t.string   "city"
     t.string   "state"
+    t.datetime "birthday"
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
 end
