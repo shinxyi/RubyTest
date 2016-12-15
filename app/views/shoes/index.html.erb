@@ -1,0 +1,30 @@
+<div class="right">
+  <a href="/dashboard/<%=current_user.id%>">Go to dashboard</a> |
+  <a href="/sessions" data-method="delete">Logout</a>
+</div>
+
+<h1>Hi <%=current_user.first_name%></h1>
+
+
+<h2>All Products</h2>
+<table class="info">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Seller</th>
+      <th>Date Posted</th>
+      <th>Amount</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @shoes.each do |shoe| %>
+    <tr>
+      <td><%= shoe.name %></td>
+      <td><%= shoe.user.first_name  %> <%= shoe.user.last_name %></td>
+      <td><%= shoe.created_at.strftime("%B %e, %Y") %> </td>
+      <td><%= number_to_currency(shoe.price) %></td>
+      <td><a href="/purchases/<%=shoe.id%>" data-method="post">Buy</a></td>
+    </tr>
+  <% end %>
+</table>

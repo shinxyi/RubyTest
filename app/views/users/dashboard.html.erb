@@ -1,0 +1,108 @@
+<div class="right">
+  <a href="/shoes">Go to All Products</a> |
+  <a href="/sessions" data-method="delete">Logout</a>
+</div>
+
+<h1>Hi <%=current_user.first_name%></h1>
+
+<div id="reg">
+  <h3>Sell Product</h3>
+  <ul>
+    <% if flash[:alert] %>
+      <% flash[:alert].each do |error| %>
+          <li><%= error %></li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <form action='/shoes' method='post'>
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <table>
+    <tr>
+      <td></td>
+      <td><input type="text" name="shoe[name]" placeholder="Name of New Shoes"></td>
+    </tr>
+    <tr>
+      <td>$</td>
+      <td><input type="number" name="shoe[price]" min="0.00" step="0.01" placeholder="0.00" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button type='submit'>Sell</button></td>
+    </tr>
+  </table>
+  </form>
+</div>
+
+
+<br/><br/>
+<p><b>Your products that are not yet sold:</b></p>
+<table class="info">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Date Posted</th>
+      <th>Amount</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @on_sale.each do |shoe| %>
+    <tr>
+      <td><%= shoe.name %></td>
+      <td><%= shoe.created_at.strftime("%B %e, %Y") %></td>
+      <td><%= number_to_currency(shoe.price) %></td>
+      <td><a href="/shoes/<%=shoe.id%>" data-method="delete">Remove</a></td>
+    </tr>
+  <% end %>
+</table>
+
+<br/><br/>
+<p><b>Sales:</b></p>
+<table class="info">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Date Bought</th>
+      <th>Buyer</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @sales.each do |sale| %>
+    <tr>
+      <td><%= sale.shoe.name %></td>
+      <td><%= sale.created_at.strftime("%B %e, %Y") %></td>
+      <td><%= sale.user.first_name %> <%= sale.user.last_name %></td>
+      <td><%= number_to_currency(sale.shoe.price) %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="right">
+  <b>Total:</b> <%= number_to_currency(@total_sales) %>
+</div>
+
+<br/><br/>
+<p><b>Purchases:</b></p>
+<table class="info">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Date Bought</th>
+      <th>Seller</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @purchases.each do |purchase| %>
+    <tr>
+      <td><%= purchase.shoe.name %></td>
+      <td><%= purchase.created_at.strftime("%B %e, %Y") %></td>
+      <td><%= purchase.shoe.user.first_name %> <%= purchase.shoe.user.last_name %></td>
+      <td><%= number_to_currency(purchase.shoe.price) %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="right">
+  <b>Total:</b> <%= number_to_currency(@total_purchases)%>
+</div>
