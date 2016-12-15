@@ -17,7 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # username: ubuntu # also delete username/pw at bottom!!! then in ubuntu, "git pull"
+  username: ubuntu # also delete username/pw at bottom!!! then in ubuntu, "git pull"
 
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
